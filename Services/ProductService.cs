@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,20 +10,22 @@ namespace WebApp1.Services
 {
     public class ProductService
     {
-        private string _dataSource = "dbserverharshit.database.windows.net";
-        private string _database = "DBHarshit";
-        private string _userId = "harshit";
-        private string _password = "India_2020";
+        //private string _dataSource = "dbserverharshit.database.windows.net";
+        //private string _database = "DBHarshit";
+        //private string _userId = "harshit";
+        //private string _password = "India_2020";
 
         private string GetSqlConnectionString()
         {
-            var connectionStringBuilder = new SqlConnectionStringBuilder();
-            connectionStringBuilder.DataSource = _dataSource;
-            connectionStringBuilder.InitialCatalog = _database;
-            connectionStringBuilder.UserID = _userId;
-            connectionStringBuilder.Password = _password;
-            connectionStringBuilder.ConnectTimeout = 300;
-            return connectionStringBuilder.ConnectionString;
+            return ConfigurationManager.ConnectionStrings["SQLConnection"].ConnectionString;
+            //var connectionStringBuilder = new SqlConnectionStringBuilder();
+            //connectionStringBuilder.DataSource = _dataSource;
+            //connectionStringBuilder.InitialCatalog = _database;
+            //connectionStringBuilder.UserID = _userId;
+            //connectionStringBuilder.Password = _password;
+            //connectionStringBuilder.ConnectTimeout = 300;
+            //return connectionStringBuilder.ConnectionString;
+
         }
 
         public List<Product> GetProducts()
